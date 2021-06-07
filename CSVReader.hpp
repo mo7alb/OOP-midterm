@@ -5,11 +5,13 @@
 
 #include "OrderBookEntry.hpp"
 
+using namespace std;
+
 class CSVReader{
 public:
     CSVReader();
-    static std::vector<OrderBookEntry> readCSV(std::string csvFile);
+    static vector<OrderBookEntry> readCSV(string csvFile);
 private:
-    static std::vector<std::string> tokenise(std::string csvLine, char separator);
-    static OrderBookEntry stringsToOBE(std::vector<std::string> strings);
+    static vector<string> tokenise(string csvLine, char separator);
+    static OrderBookEntry stringsToOBE(vector<string> strings);
 };

@@ -4,14 +4,16 @@
 #include <iostream>
 #include <map>
 
-OrderBook::OrderBook(std::string filename) {
+using namespace std;
+
+OrderBook::OrderBook(string filename) {
     orders = CSVReader::readCSV(filename);
 }
 
-std::vector<std::string> OrderBook::getKnownProducts() {
-    std::vector<std::string> products;
+vector<string> OrderBook::getKnownProducts() {
+    vector<string> products;
     
-    std::map<std::string, bool> productMap;
+    map<string, bool> productMap;
     
     for (OrderBookEntry& e : orders) {
         productMap[e.product] = true;
@@ -25,8 +27,8 @@ std::vector<std::string> OrderBook::getKnownProducts() {
     return products;
 }
 
-std::vector<OrderBookEntry> OrderBook::getOrders(OrderBookType type, std::string product, std::string timestamp) {
-    std::vector<OrderBookEntry> orders_sub;
+vector<OrderBookEntry> OrderBook::getOrders(OrderBookType type, string product, string timestamp) {
+    vector<OrderBookEntry> orders_sub;
     
     for (OrderBookEntry& e : orders) {
         if (e.orderType == type && e.product == product && e.timestamp == timestamp) {
@@ -37,7 +39,7 @@ std::vector<OrderBookEntry> OrderBook::getOrders(OrderBookType type, std::string
     return orders_sub;
 }
 
-double OrderBook::getHighPrice(std::vector<OrderBookEntry>& orders) {
+double OrderBook::getHighPrice(vector<OrderBookEntry>& orders) {
     double Highest = orders[0].price;
     for (OrderBookEntry& e : orders)
     {
@@ -46,7 +48,7 @@ double OrderBook::getHighPrice(std::vector<OrderBookEntry>& orders) {
     return Highest;
 }
 
-double OrderBook::getLowPrice(std::vector<OrderBookEntry>& orders) {
+double OrderBook::getLowPrice(vector<OrderBookEntry>& orders) {
     double lowest = orders[0].price;
     for (OrderBookEntry& e : orders)
     {
@@ -55,7 +57,7 @@ double OrderBook::getLowPrice(std::vector<OrderBookEntry>& orders) {
     return lowest;
 }
 
-double OrderBook::getAveragePrice(std::vector<OrderBookEntry>& orders) {
+double OrderBook::getAveragePrice(vector<OrderBookEntry>& orders) {
     double sum = 0;
     for (OrderBookEntry& e : orders)
     {
@@ -64,19 +66,19 @@ double OrderBook::getAveragePrice(std::vector<OrderBookEntry>& orders) {
     return sum/orders.size();
 }
 
-double OrderBook::getPriceSpread(std::vector<OrderBookEntry>& orders) {
+double OrderBook::getPriceSpread(vector<OrderBookEntry>& orders) {
     double lowest = getLowPrice(orders);
     double highest = getHighPrice(orders);
 
     return highest - lowest;
 }
 
-std::string OrderBook::getEarliestTime() {
+string OrderBook::getEarliestTime() {
     return orders[0].timestamp;
 }
 
-std::string OrderBook::getNextTime(std::string timestamp) {
-    std::string next_timestamp = "";
+string OrderBook::getNextTime(string timestamp) {
+    string next_timestamp = "";
     for (OrderBookEntry& e : orders) {
         if (e.timestamp > timestamp) {
             next_timestamp = e.timestamp;

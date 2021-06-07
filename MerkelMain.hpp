@@ -1,9 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "OrderBookEntry.hpp"
 #include "OrderBook.hpp"
+
+using namespace std;
 
 class MerkelMain {
     public:
@@ -23,7 +26,7 @@ class MerkelMain {
     bool exitMenu();
     bool processUserOption(int userOption);
     
-    std::string currentTime;
+    string currentTime;
 
     OrderBook orderBook{"20200317.csv"};
 };
