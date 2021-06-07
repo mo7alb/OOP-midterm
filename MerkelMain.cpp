@@ -74,15 +74,6 @@ void MerkelMain::printMarketStats() {
 
         std::cout << std::endl;
     }
-//    std::cout << "OrderBook Contains: " << orders.size() << " entries" << std::endl;
-//
-//    unsigned int bids = 0;
-//    unsigned int asks = 0;
-//
-//    for (OrderBookEntry& e : orders) {
-//        if (e.orderType == OrderBookType::ask) asks ++;
-//        if (e.orderType == OrderBookType::bid) bids ++;
-//    }
 }
 void MerkelMain::makeOffer() {
     std::cout << "Lets sell some stufff, ohhh yeah" << std::endl;
@@ -98,6 +89,7 @@ void MerkelMain::printWallet() {
 
 void MerkelMain::nextTimeFrame() {
     std::cout << "Going to next time frame." << std::endl;
+    currentTime = orderBook.getNextTime(currentTime);
 }
 
 bool MerkelMain::exitMenu() {
