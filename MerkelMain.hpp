@@ -23,5 +23,7 @@ class MerkelMain {
     bool exitMenu();
     bool processUserOption(int userOption);
     
+    std::string currentTime;
+
     OrderBook orderBook{"20200317.csv"};
 };

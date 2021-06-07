@@ -23,7 +23,8 @@ class OrderBook {
     static double getAveragePrice(std::vector<OrderBookEntry>& orders);
     /** return the price spread of all the bids sent */
     static double getPriceSpread(std::vector<OrderBookEntry>& orders);
-    
+    /** returns the earliest order placed */
+    std::string getEarliestTime();
 
     private:
     std::vector<OrderBookEntry> orders;

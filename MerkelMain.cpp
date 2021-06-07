@@ -7,9 +7,10 @@
 MerkelMain::MerkelMain(){}
 
 void MerkelMain::init() {
-//    loadOrderBook();
     bool runProgram = true;
     int input;
+    currentTime = orderBook.getEarliestTime();
+
     while (runProgram) {
         printMenu();
         input = getUserOption();
@@ -39,6 +40,8 @@ void MerkelMain::printMenu() {
     // 7 exit from the application
     std::cout << "7: Exit" << std::endl;
     std::cout << "---------------------" << std::endl;
+
+    std::cout << "Current time is: " << currentTime << std::endl;
 }
 
 int MerkelMain::getUserOption() {

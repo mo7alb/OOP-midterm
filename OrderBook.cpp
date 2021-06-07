@@ -70,3 +70,7 @@ double OrderBook::getPriceSpread(std::vector<OrderBookEntry>& orders) {
 
     return highest - lowest;
 }
+
+std::string OrderBook::getEarliestTime() {
+    return orders[0].timestamp;
+}
