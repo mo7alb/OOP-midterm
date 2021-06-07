@@ -4,20 +4,22 @@
 
 #include "CSVReader.hpp"
 
+using namespace std;
+
 CSVReader::CSVReader(){}
 
-std::vector<OrderBookEntry> CSVReader::readCSV(std::string csvFilename) {
-    std::vector<OrderBookEntry> entries;
-    std::ifstream csvFile{csvFilename};
-    std::string line;
+vector<OrderBookEntry> CSVReader::readCSV(string csvFilename) {
+    vector<OrderBookEntry> entries;
+    ifstream csvFile{csvFilename};
+    string line;
     
     if (csvFile.is_open()){
-        while (std::getline(csvFile, line)) {
+        while (getline(csvFile, line)) {
             try {
                 OrderBookEntry obe = stringsToOBE(tokenise(line, ','));
                 entries.push_back(obe);
-            } catch (const std::exception& e) {
-//                std::cout << "Bad Data" << std::endl;
+            } catch (const exception& e) {
+//                cout << "Bad Data" << endl;
 //                continue;
             }
             
@@ -27,11 +29,11 @@ std::vector<OrderBookEntry> CSVReader::readCSV(std::string csvFilename) {
     return entries;
 }
 
-std::vector<std::string> CSVReader::tokenise(std::string csvLine, char separator)
+vector<string> CSVReader::tokenise(string csvLine, char separator)
 {
-    std::vector<std::string> tokens;
+    vector<string> tokens;
     signed int start, end;
-    std::string token;
+    string token;
     start = csvLine.find_first_not_of(separator, 0);
 
     do {
@@ -48,22 +50,22 @@ std::vector<std::string> CSVReader::tokenise(std::string csvLine, char separator
     return tokens;
 }
 
-OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
+OrderBookEntry CSVReader::stringsToOBE(vector<string> tokens)
 {
     double price, amount;
  
     if (tokens.size() != 5) {
-        std::cout << "Bad Line" << std::endl;
-        throw std::exception{};
+        cout << "Bad Line" << endl;
+        throw exception{};
     }
     
     try {
-        price = std::stod(tokens[3]);
-        amount = std::stod(tokens[4]);
+        price = stod(tokens[3]);
+        amount = stod(tokens[4]);
     }
-    catch(const std::exception& e) {
-        std::cout << "Bad float! " << tokens[3] <<std::endl;
-        std::cout << "Bad float! " << tokens[4] <<std::endl;
+    catch(const exception& e) {
+        cout << "Bad float! " << tokens[3] <<endl;
+        cout << "Bad float! " << tokens[4] <<endl;
         throw;
     }
     
